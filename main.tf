@@ -7,14 +7,8 @@ terraform {
   }
 }
 
-provider "aws" {
-}
-
-# TODO: Add vpc flow logs
-
 module "vpc" {
   source = "./modules/vpc"
-  
 }
 
 module "security_group" {
@@ -28,16 +22,6 @@ module "alb" {
   vpc_id = module.vpc.vpc_id
   public_subnets_list = module.vpc.public_subnets_list
   security_group_id = module.security_group.security_group_id
-}
-
-resource "aws_key_pair" "deployer" {
-  key_name   = "deployer-key"
-  public_key = ""
-}
-
-import {
-  to = aws_key_pair.deployer
-  id = "deployer-key"
 }
 
 module "asg" {
