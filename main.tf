@@ -7,6 +7,9 @@ terraform {
   }
 }
 
+provider "aws" {
+}
+
 # TODO: Add vpc flow logs
 
 module "vpc" {
